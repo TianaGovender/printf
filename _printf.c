@@ -31,17 +31,17 @@ int _printf(const char * const format, ...)
 		switch (format[i])
 		{
 			case 'i':
-				printf("%d", va_arg(args, int));
+				print_string(va_arg(args, char*));
 				n = 1;
 				numc = numc + 1;
 				break;
 			case 'f':
-				printf("%f", va_arg(args, double));
+				print_string(va_arg(args, char*));
 				n = 1;
 				numc = numc + 1;
 				break;
 			case 'c':
-				printf("%c", va_arg(args, int));
+				print_string(va_arg(args, char *));
 				n = 1;
 				numc = numc + 1;
 				break;
@@ -49,12 +49,12 @@ int _printf(const char * const format, ...)
 				str = va_arg(args, char *);
 				if (str == NULL)
 				{
-					printf("(nil)");
+					print_string("(nil)");
 					break;
 				}
 				n = 1;
 				numc = numc + 1;
-				printf("%s", str);
+				print_string(str);
 		}
 
 		j = 0;
@@ -63,7 +63,7 @@ int _printf(const char * const format, ...)
 		{
 			if (n == 1 && format[i] == tpe[j] && format[i + 1] != '\0')
 			{
-				printf(", ");
+				print_string(", ");
 				break;
 			}
 			j++;
