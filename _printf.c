@@ -52,6 +52,12 @@ int _printf(const char * const format, ...)
 			}
 		}
 
+		if (format[i] == 92 && format[i + 1] == 'n')
+		{
+			_putchar('\n');
+			i++;
+		}
+
 		i++;
 
 	}
