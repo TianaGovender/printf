@@ -15,9 +15,8 @@ int _printf(const char * const format, ...);
 int _printf(const char * const format, ...)
 {
 	va_list args;
-	int i, n, j, numc;
-	char *str;
-	const char tpe[] = "cifs";
+	int i, numc, s;
+	char *ss;
 
 	i = 0;
 	numc = 0;
@@ -26,55 +25,40 @@ int _printf(const char * const format, ...)
 
 	while (format != NULL && format[i] != '\0')
 	{
-		n = 0;
-
-		switch (format[i])
+		if (format[i] != '[' && format[i + 1] != '%' && format[i + 3] != ']')
 		{
-			case 'i':
-				print_string(va_arg(args, char*));
-				n = 1;
-				numc = numc + 1;
-				break;
-			case 'f':
-				print_string(va_arg(args, char*));
-				n = 1;
-				numc = numc + 1;
-				break;
-			case 'c':
-				print_string(va_arg(args, char *));
-				n = 1;
-				numc = numc + 1;
-				break;
-			case 's':
-				str = va_arg(args, char *);
-				if (str == NULL)
-				{
-					print_string("(nil)");
-					break;
-				}
-				n = 1;
-				numc = numc + 1;
-				print_string(str);
+			_putchar(format[i]);
+			numc++;
 		}
 
-		j = 0;
-
-		while (tpe[j] != '\0')
+		if (format[i] == '[' && format[i + 1] == '%' && format[i + 3] == ']')
 		{
-			if (n == 1 && format[i] == tpe[j] && format[i + 1] != '\0')
+			switch (format[i + 2])
 			{
-				print_string(", ");
-				break;
+				case 'c':
+					s = va_arg(args, int);
+
+					_putchar(s);
+					i = i + 3;
+					numc++;
+					break;
+				case 's':
+					ss = va_arg(args, char *);
+
+					print_string(ss);
+					i = i + 3;
+					numc++;
+					break;
 			}
-			j++;
 		}
 
 		i++;
+
 	}
 
 	va_end(args);
 
-	printf("\n");
+	_putchar('\n');
 
 	return (numc);
 }
