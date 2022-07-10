@@ -25,28 +25,28 @@ int _printf(const char * const format, ...)
 
 	while (format != NULL && format[i] != '\0')
 	{
-		if (format[i] != '[' && format[i + 1] != '%' && format[i + 3] != ']')
+		if (format[i] != '%' && format[i + 1] != 's' && format[i + 1] != 'c')
 		{
 			_putchar(format[i]);
 			numc++;
 		}
 
-		if (format[i] == '[' && format[i + 1] == '%' && format[i + 3] == ']')
+		if (format[i] == '%')
 		{
-			switch (format[i + 2])
+			switch (format[i + 1])
 			{
 				case 'c':
 					s = va_arg(args, int);
 
 					_putchar(s);
-					i = i + 3;
+					i++;
 					numc++;
 					break;
 				case 's':
 					ss = va_arg(args, char *);
 
 					print_string(ss);
-					i = i + 3;
+					i++;
 					numc++;
 					break;
 			}
