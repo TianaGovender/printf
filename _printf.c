@@ -7,6 +7,34 @@
 int _printf(const char * const format, ...);
 
 /**
+ * find_f - finds the relevant funct for the format
+ * @format: char
+ * Return: 0
+ */
+
+int (*find_f(const char *format))(va_list)
+{
+	unsigned int i;
+	code_format f_fun[] = {
+		{"c", print_char},
+		{"s", print_string},
+		{NULL, NULL}
+	};
+
+	i = 0;
+	while (f_fun[i].cf)
+	{
+		if (f_fun[i].cf[0] == (*format))
+		{
+			return (f_fun[i].f);
+		}
+		i++;
+	}
+
+	return (NULL);
+}
+
+/**
  * _printf - acts as printf
  * @format: char
  * Return: num of char printed
@@ -15,8 +43,8 @@ int _printf(const char * const format, ...);
 int _printf(const char * const format, ...)
 {
 	va_list args;
-	int i, numc, s;
-	char *ss;
+	int (*f)(va_list);
+	unsigned int i, numc;
 
 	i = 0;
 	numc = 0;
@@ -25,46 +53,39 @@ int _printf(const char * const format, ...)
 
 	while (format != NULL && format[i] != '\0')
 	{
-		if (format[i] != '%' && format[i + 1] != 's' && format[i + 1] != 'c')
+		if (format[i] != '%' && format[i])
 		{
 			_putchar(format[i]);
 			numc++;
-		}
-
-		if (format[i] == '%')
-		{
-			switch (format[i + 1])
-			{
-				case 'c':
-					s = va_arg(args, int);
-
-					_putchar(s);
-					i++;
-					numc++;
-					break;
-				case 's':
-					ss = va_arg(args, char *);
-
-					print_string(ss);
-					i++;
-					numc++;
-					break;
-			}
-		}
-
-		if (format[i] == 92 && format[i + 1] == 'n')
-		{
-			_putchar('\n');
 			i++;
 		}
 
-		i++;
+		f = find_f(&format[i + 1]);
 
+		if (f != NULL)
+		{
+			numc = numc + f(args);
+			i = i + 2;
+			continue;
+		}
+
+		if (!format[i + 1])
+			return (-1);
+
+		_putchar(format[i]);
+		numc++;
+
+		if (format[i + 1] == '%')
+		{
+			i = i + 2;
+		}
+		else
+		{
+			i++;
+		}
 	}
 
 	va_end(args);
-
-	_putchar('\n');
 
 	return (numc);
 }

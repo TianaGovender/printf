@@ -1,23 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include "main.h"
 
 /**
  * print_string - Printts string
  * @s: string
+ * Return: 0
  */
 
-void print_string(char *s)
+int print_string(va_list s)
 {
 	int i, len;
+	char *str;
 
-	len = _strlen(s);
+	str = va_arg(s, char *);
+	if (str == NULL)
+		str = "(null)";
+
 	i = 0;
+	len = _strlen(str);
 
 	while (i < len)
 	{
-		_putchar(s[i]);
+		_putchar(str[i]);
 		fflush(stdout);
 		i++;
 	}
+
+	return (i);
 }
