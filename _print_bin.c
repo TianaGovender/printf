@@ -28,7 +28,5 @@ int print_bin(va_list b)
 	i *= 10;
 	}
 
-	print_string(itoa(bb));
-
 	return (bb);
 }
