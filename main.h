@@ -12,6 +12,7 @@ int print_string(va_list s);
 int print_bin(va_list b);
 int print_int(va_list arguments, char *buf, unsigned int ibuf);
 int _printf(const char * const format, ...);
+int find_f(const char *format, va_list args);
 
 /**
  * struct c_format - finding format

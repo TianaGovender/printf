@@ -9,12 +9,13 @@ int _printf(const char * const format, ...);
 /**
  * find_f - finds the relevant funct for the format
  * @format: char
- * Return: 0
+ * @args: list
+ * Return: num of char
  */
 
-int (*find_f(const char *format))(va_list)
+int find_f(const char *format, va_list args)
 {
-	unsigned int i;
+	int i, n, f_v, numc;
 	code_format f_fun[] = {
 		{"c", print_char},
 		{"s", print_string},
@@ -22,16 +23,50 @@ int (*find_f(const char *format))(va_list)
 	};
 
 	i = 0;
-	while (f_fun[i].cf)
+	numc = 0;
+	while (format[i] != '\0')
 	{
-		if (f_fun[i].cf[0] == format[0])
+		if (format[i] == '%')
 		{
-			return (f_fun[i / 2].f);
+			n = 0;
+			while (f_fun[n].cf != NULL)
+			{
+				if (format[i + 1] == f_fun[n].cf[0])
+				{
+					f_v = f_fun[n].f(args);
+
+					if (f_v == -1)
+						return (-1);
+
+					numc = numc + f_v;
+					break;
+				}
+				n++;
+			}
+
+			if (f_fun[n].cf == NULL && format[i + 1] != ' ')
+			{
+				if (format[i + 1] != '\0')
+				{
+					_putchar(format[i]);
+					_putchar(format[i + 1]);
+					numc = numc + 2;
+				}
+				else
+					return (-1);
+			}
+			i++;
 		}
+		else
+		{
+			_putchar(format[i]);
+			numc++;
+		}
+
 		i++;
 	}
 
-	return (NULL);
+	return (numc);
 }
 
 /**
@@ -43,49 +78,16 @@ int (*find_f(const char *format))(va_list)
 int _printf(const char * const format, ...)
 {
 	va_list args;
-	int (*f)(va_list);
-	unsigned int i, numc;
-
-	i = 0;
-	numc = 0;
+	int numc = 0;
 
 	if (format == NULL)
 		return (-1);
 
 	va_start(args, format);
 
-	while (format[i] != '\0')
-	{
-		if (format[i] != '%' && (format[i + 1] == 'c' || format[i + 1] == 's'))
-		{
-			_putchar(format[i]);
-			numc++;
-			i++;
-		}
+	numc = find_f(format, args);
 
-		if (format[i] == '\0')
-			return (numc);
-
-		f = find_f(&format[i + 1]);
-
-		if (f != NULL)
-		{
-			numc = numc + f(args);
-			i = i + 2;
-			continue;
-		}
-
-		if (!format[i + 1])
-			return (-1);
-
-		_putchar(format[i]);
-		numc++;
-
-		if (format[i + 1] == '%')
-			i = i + 2;
-		else
-			i++;
-	}
+	va_end(args);
 
 	return (numc);
 }
