@@ -1,32 +1,40 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdarg.h>
 #include "main.h"
-
 /**
  * print_bin - Prints an int in binary
  * @b: unsigned int
  * Return: the binary
  */
-
 int print_bin(va_list b)
 {
-	int bin, rm, i;
+	int len, i;
 	unsigned int bb;
-
-	bin = 0;
-	rm = 0;
-	i = 1;
+	char *s, *rs;
 
 	bb = va_arg(b, unsigned int);
-
-	while (bb != 0)
+	if (bb == 0)
+		return (_putchar('0'));
+	if (bb < 1)
+		return (-1);
+	len = b_len(bb, 2);
+	s = malloc(sizeof(char) * len + 1);
+	if (s == NULL)
+		return (-1);
+	for (i = 0; bb > 0; i++)
 	{
-	rm = bb % 2;
-	bb /= 2;
-	bin += rm * i;
-	i *= 10;
+		if (bb % 2 == 0)
+			s[i] = '0';
+		else
+			s[i] = '1';
+		bb = bb / 2;
 	}
-
-	return (bb);
+	s[i] = '\0';
+	rs = rev_str(s);
+	if (rs == NULL)
+		return (-1);
+	print_b(rs);
+	free(s);
+	free(rs);
+	return (len);
 }

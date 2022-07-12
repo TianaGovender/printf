@@ -7,6 +7,10 @@
 
 int _putchar(char c);
 int _strlen(char *s);
+int b_len(unsigned int n, int base);
+void print_b(char *s);
+char *rev_str(char *s);
+char *_memcpy(char *d, char *s, unsigned int);
 int print_char(va_list c);
 int print_string(va_list s);
 int print_bin(va_list b);

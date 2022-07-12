@@ -19,6 +19,7 @@ int find_f(const char *format, va_list args)
 	code_format f_fun[] = {
 		{"c", print_char},
 		{"s", print_string},
+		{"b", print_bin},
 		{NULL, NULL}
 	};
 
