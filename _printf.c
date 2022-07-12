@@ -67,6 +67,9 @@ int _printf(const char *format, ...)
 		{"r", print_rev},
 		{"R", print_rot},
 		{"u", print_un_int},
+		{"o", print_octal},
+		{"x", print_hex},
+		{"X", print_heX},
 		{NULL, NULL}
 	};
 	va_list args;
