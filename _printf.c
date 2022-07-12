@@ -54,9 +54,9 @@ int _printf(const char * const format, ...)
 
 	va_start(args, format);
 
-	while (format[i])
+	while (format[i] != '\0')
 	{
-		if (format[i] != '%' && format[i])
+		if (format[i] != '%' && (format[i + 1] == 'c' || format[i + 1] == 's'))
 		{
 			_putchar(format[i]);
 			numc++;
@@ -82,13 +82,12 @@ int _printf(const char * const format, ...)
 		numc++;
 
 		if (format[i + 1] == '%')
-		{
 			i = i + 2;
-		}
 		else
-		{
 			i++;
-		}
+
+		if (format[i] == 92 && format[i + 1] == 'n')
+			_putchar('\n');
 	}
 
 	va_end(args);
