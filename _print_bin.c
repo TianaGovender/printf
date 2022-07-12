@@ -52,7 +52,7 @@ int print_octal(va_list list)
 	unsigned int num;
 	int len;
 	char *octal_rep;
-	char *rev_str;
+	char *rev_s;
 
 	num = va_arg(list, unsigned int);
 
@@ -72,13 +72,13 @@ int print_octal(va_list list)
 
 	}
 	octal_rep[len] = '\0';
-	rev_str = rev_str(octal_rep);
-	if (rev_str == NULL)
+	rev_s = rev_str(octal_rep);
+	if (rev_s == NULL)
 		return (-1);
 
-	print_b(rev_str);
+	print_b(rev_s);
 	free(octal_rep);
-	free(rev_str);
+	free(rev_s);
 	return (len);
 }
 
