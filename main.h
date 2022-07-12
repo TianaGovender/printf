@@ -32,5 +32,5 @@ typedef struct c_format
 } code_format;
 
 
-int find_f(const char *format, va_list args, code_format f_fun[]); 
+int find_f(const char *format, va_list args, code_format f_fun[]);
 #endif
