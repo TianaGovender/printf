@@ -9,24 +9,15 @@
  * @args: list
  * Return: num of char
  */
-int find_f(const char *format, va_list args)
+int find_f(const char *format, va_list args, code_format f_fun[])
 {
-	int i = 0, n, f_v, numc = 0;
-	code_format f_fun[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{"b", print_bin},
-		{"r", print_rev},
-		{"R", print_rot},
-		{NULL, NULL}
-	};
-
-	while (format[i] != '\0')
+	int i , n, f_v, numc = 0;
+	
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
-			n = 0;
-			while (f_fun[n].cf != NULL)
+			for (n = 0; f_fun[n].cf != NULL; n++)
 			{
 				if (format[i + 1] == f_fun[n].cf[0])
 				{
@@ -36,7 +27,6 @@ int find_f(const char *format, va_list args)
 					numc = numc + f_v;
 					break;
 				}
-				n++;
 			}
 			if (f_fun[n].cf == NULL && format[i + 1] != ' ')
 			{
@@ -56,7 +46,6 @@ int find_f(const char *format, va_list args)
 			_putchar(format[i]);
 			numc++;
 		}
-		i++;
 	}
 	return (numc);
 }
@@ -68,6 +57,14 @@ int find_f(const char *format, va_list args)
 
 int _printf(const char *format, ...)
 {
+	code_format f_fun[] = {
+		{"c", print_char},
+		{"s", print_string},
+		{"b", print_bin},
+		{"r", print_rev},
+		{"R", print_rot},
+		{NULL, NULL}
+	};
 	va_list args;
 	int numc = 0;
 
@@ -76,7 +73,7 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	numc = find_f(format, args);
+	numc = find_f(format, args, f_fun);
 
 	va_end(args);
 
