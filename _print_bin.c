@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
+
+int hex_check(int, char);
+
 /**
  * print_bin - Prints an int in binary
  * @b: unsigned int
