@@ -16,7 +16,10 @@ int print_string(va_list s);
 int print_bin(va_list b);
 int print_rot(va_list R);
 int print_rev(va_list a);
-int print_int(va_list arguments, char *buf, unsigned int ibuf);
+int print_un_int(va_list i);
+int print_int(va_list i);
+int print_un_num(unsigned int n);
+int print_num(va_list n);
 int _printf(const char *format, ...);
 
 /**

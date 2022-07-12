@@ -61,9 +61,12 @@ int _printf(const char *format, ...)
 	code_format f_fun[] = {
 		{"c", print_char},
 		{"s", print_string},
+		{"i", print_int},
+		{"d", print_int},
 		{"b", print_bin},
 		{"r", print_rev},
 		{"R", print_rot},
+		{"u", print_un_int},
 		{NULL, NULL}
 	};
 	va_list args;
