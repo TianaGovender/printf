@@ -49,9 +49,12 @@ int _printf(const char * const format, ...)
 	i = 0;
 	numc = 0;
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(args, format);
 
-	while (format != NULL && format[i] != '\0')
+	while (format[i])
 	{
 		if (format[i] != '%' && format[i])
 		{
@@ -59,6 +62,9 @@ int _printf(const char * const format, ...)
 			numc++;
 			i++;
 		}
+
+		if (format[i] == '\0')
+			return (numc);
 
 		f = find_f(&format[i + 1]);
 
