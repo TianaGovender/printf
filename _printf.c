@@ -24,9 +24,9 @@ int (*find_f(const char *format))(va_list)
 	i = 0;
 	while (f_fun[i].cf)
 	{
-		if (f_fun[i].cf[0] == (*format))
+		if (f_fun[i].cf[0] == format[0])
 		{
-			return (f_fun[i].f);
+			return (f_fun[i / 2].f);
 		}
 		i++;
 	}
@@ -85,12 +85,7 @@ int _printf(const char * const format, ...)
 			i = i + 2;
 		else
 			i++;
-
-		if (format[i] == 92 && format[i + 1] == 'n')
-			_putchar('\n');
 	}
-
-	va_end(args);
 
 	return (numc);
 }

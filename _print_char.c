@@ -16,7 +16,6 @@ int print_char(va_list c)
 	ch = va_arg(c, int);
 
 	_putchar(ch);
-	fflush(stdout);
 
 	return (1);
 }
