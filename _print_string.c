@@ -11,7 +11,7 @@
 
 int print_string(va_list s)
 {
-	int i, len;
+	int i;
 	char *str;
 
 	str = va_arg(s, char *);
@@ -19,9 +19,8 @@ int print_string(va_list s)
 		str = "(null)";
 
 	i = 0;
-	len = _strlen(str);
 
-	while (i < len)
+	while (str[i] != '\0')
 	{
 		_putchar(str[i]);
 		fflush(stdout);
