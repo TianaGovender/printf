@@ -4,8 +4,6 @@
 #include <stdarg.h>
 #include "main.h"
 
-int _printf(const char * const format, ...);
-
 /**
  * find_f - finds the relevant funct for the format
  * @format: char
@@ -78,7 +76,7 @@ int find_f(const char *format, va_list args)
  * Return: num of char printed
  */
 
-int _printf(const char * const format, ...)
+int _printf(const char *format, ...)
 {
 	va_list args;
 	int numc = 0;

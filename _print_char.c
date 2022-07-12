@@ -11,7 +11,7 @@
 
 int print_char(va_list c)
 {
-	unsigned char ch;
+	char ch;
 
 	ch = va_arg(c, int);
 

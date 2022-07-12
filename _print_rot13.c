@@ -40,6 +40,6 @@ int print_rot(va_list R)
 		}
 		i++;
 	}
-	
+
 	return (i);
 }
