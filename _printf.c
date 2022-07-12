@@ -7,12 +7,13 @@
  * find_f - finds the relevant funct for the format
  * @format: char
  * @args: list
+ * @f_fun: struct
  * Return: num of char
  */
 int find_f(const char *format, va_list args, code_format f_fun[])
 {
-	int i , n, f_v, numc = 0;
-	
+	int i, n, f_v, numc = 0;
+
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')

@@ -18,7 +18,6 @@ int print_rot(va_list R);
 int print_rev(va_list a);
 int print_int(va_list arguments, char *buf, unsigned int ibuf);
 int _printf(const char *format, ...);
-int find_f(const char *format, va_list args);
 
 /**
  * struct c_format - finding format
@@ -32,4 +31,6 @@ typedef struct c_format
 	int (*f)(va_list);
 } code_format;
 
+
+int find_f(const char *format, va_list args, code_format f_fun[]); 
 #endif
