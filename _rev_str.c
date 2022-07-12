@@ -4,92 +4,32 @@
 #include "main.h"
 
 /**
- * b_len - len of octo
- * @n: int
- * @base: int
- * Return: int len
+ * print_rev - prints reversed str
+ * @a: va_list
+ * Return: int
  */
 
-int b_len(unsigned int n, int base)
+int print_rev(va_list a)
 {
-	unsigned int i = 0;
+	int i;
+	char *s, *p;
 
-	while (n > 0)
+	s = va_arg(a, char *);
+	if (s == NULL)
+		return (-1);
+
+	p = rev_str(s);
+	if (p == NULL)
 	{
-		n = n / base;
+		return (-1);
+	}
+
+	i = 0;
+	while (p[i] != '\0')
+	{
+		_putchar(p[i]);
 		i++;
 	}
 
 	return (i);
-}
-
-/**
- * print_b - print str
- * @s: char
- */
-
-void print_b(char *s)
-{
-	int i;
-
-	while (s[i] != '\0')
-	{
-		_putchar(s[i]);
-		i++;
-	}
-}
-
-/**
- * rev_str - reverses str
- * @s: char
- * Return: reversed string
- */
-
-char *rev_str(char *s)
-{
-	int len, i;
-	char tmp, *d;
-
-	len = _strlen(s);
-
-	d = malloc(sizeof(char) * len + 1);
-	if (d == NULL)
-		return (NULL);
-
-	_memcpy(d, s, len);
-
-	i = 0;
-	while (i < len)
-	{
-		tmp = d[len - 1];
-		d[len - 1] = d[i];
-		d[i] = tmp;
-		i++;
-		len--;
-	}
-
-	return (d);
-}
-
-/**
- * _memcpy - copies
- * @d: char
- * @s: char
- * @n: int
- * Return: (d)
- */
-
-char *_memcpy(char *d, char *s, unsigned int n)
-{
-	unsigned int i = 0;
-
-	while (i < n)
-	{
-		d[i] = s[i];
-		i++;
-	}
-
-	d[i] = '\0';
-
-	return (d);
 }

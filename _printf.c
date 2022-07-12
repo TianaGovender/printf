@@ -20,6 +20,8 @@ int find_f(const char *format, va_list args)
 		{"c", print_char},
 		{"s", print_string},
 		{"b", print_bin},
+		{"r", print_rev},
+		{"R", print_rot},
 		{NULL, NULL}
 	};
 

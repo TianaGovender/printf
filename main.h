@@ -14,6 +14,8 @@ char *_memcpy(char *d, char *s, unsigned int);
 int print_char(va_list c);
 int print_string(va_list s);
 int print_bin(va_list b);
+int print_rot(va_list R);
+int print_rev(va_list a);
 int print_int(va_list arguments, char *buf, unsigned int ibuf);
 int _printf(const char * const format, ...);
 int find_f(const char *format, va_list args);
